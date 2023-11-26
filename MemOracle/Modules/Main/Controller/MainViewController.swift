@@ -23,8 +23,10 @@ final class MainViewController: UIViewController {
         fetchMemes(with: Link.api.rawValue)
         setViews()
         setupConstraints()
-
-//        showMemes()
+        
+        mainView.alertAction = {
+            self.showAlert()
+        }
     }
     
     // MARK: - Private Methods
@@ -61,6 +63,19 @@ final class MainViewController: UIViewController {
             self.mainView.configure(imagesData: dataMemes)
         }
    
+    }
+    
+    private func showAlert() {
+        let alertController = UIAlertController(
+            title: "Write your question",
+            message: "",
+            preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true)
     }
     
     private func setViews() {
