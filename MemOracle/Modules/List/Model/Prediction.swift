@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct Prediction {
+    var question: String
+    var imageData: Data
+}

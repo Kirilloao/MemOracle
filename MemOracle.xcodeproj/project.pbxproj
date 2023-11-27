@@ -18,6 +18,16 @@
 		3CADAE752B1101A700D39C6A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE742B1101A700D39C6A /* TabBarController.swift */; };
 		3CADAE782B110DEE00D39C6A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE772B110DEE00D39C6A /* MainView.swift */; };
 		3CADAE7B2B110EF400D39C6A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CADAE7A2B110EF400D39C6A /* SnapKit */; };
+		3CADAE7E2B120E9400D39C6A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE7D2B120E9400D39C6A /* QuestionView.swift */; };
+		3CADAE802B12687A00D39C6A /* UIImageView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE7F2B12687A00D39C6A /* UIImageView + Extension.swift */; };
+		3CADAE822B1269D800D39C6A /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE812B1269D800D39C6A /* UIView + Extension.swift */; };
+		3CADAE842B126BE900D39C6A /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE832B126BE900D39C6A /* UIButton + Extension.swift */; };
+		3CADAE902B12864600D39C6A /* TableViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE8F2B12864600D39C6A /* TableViewBuilder.swift */; };
+		3CADAE932B1286B000D39C6A /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE922B1286B000D39C6A /* CellModel.swift */; };
+		3CADAE952B1286E900D39C6A /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE942B1286E900D39C6A /* SectionModel.swift */; };
+		3CADAE972B12870500D39C6A /* HeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE962B12870500D39C6A /* HeaderModel.swift */; };
+		3CADAE992B12A0B700D39C6A /* MemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE982B12A0B700D39C6A /* MemCell.swift */; };
+		3CADAE9C2B12AC5F00D39C6A /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CADAE9B2B12AC5F00D39C6A /* Prediction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +43,16 @@
 		3CADAE722B10FF0000D39C6A /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3CADAE742B1101A700D39C6A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3CADAE772B110DEE00D39C6A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3CADAE7D2B120E9400D39C6A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		3CADAE7F2B12687A00D39C6A /* UIImageView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Extension.swift"; sourceTree = "<group>"; };
+		3CADAE812B1269D800D39C6A /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
+		3CADAE832B126BE900D39C6A /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
+		3CADAE8F2B12864600D39C6A /* TableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewBuilder.swift; sourceTree = "<group>"; };
+		3CADAE922B1286B000D39C6A /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		3CADAE942B1286E900D39C6A /* SectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
+		3CADAE962B12870500D39C6A /* HeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderModel.swift; sourceTree = "<group>"; };
+		3CADAE982B12A0B700D39C6A /* MemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemCell.swift; sourceTree = "<group>"; };
+		3CADAE9B2B12AC5F00D39C6A /* Prediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,11 +86,10 @@
 		3CADAE542B10F70500D39C6A /* MemOracle */ = {
 			isa = PBXGroup;
 			children = (
-				3CADAE762B1104E600D39C6A /* View */,
-				3CADAE742B1101A700D39C6A /* TabBarController.swift */,
-				3CADAE6F2B10F81A00D39C6A /* Model */,
+				3CADAE8E2B12862700D39C6A /* Builder */,
+				3CADAE7C2B120E6B00D39C6A /* Extension */,
 				3CADAE6C2B10F7AC00D39C6A /* Services */,
-				3CADAE6B2B10F77600D39C6A /* Controller */,
+				3CADAE6B2B10F77600D39C6A /* Modules */,
 				3CADAE692B10F76A00D39C6A /* App */,
 				3CADAE6A2B10F77000D39C6A /* Resources */,
 				3CADAE632B10F70600D39C6A /* Info.plist */,
@@ -96,13 +115,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3CADAE6B2B10F77600D39C6A /* Controller */ = {
+		3CADAE6B2B10F77600D39C6A /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3CADAE592B10F70500D39C6A /* MainViewController.swift */,
-				3CADAE722B10FF0000D39C6A /* ListViewController.swift */,
+				3CADAE8B2B127CA800D39C6A /* TabBar */,
+				3CADAE852B127C2400D39C6A /* Main */,
+				3CADAE862B127C6B00D39C6A /* List */,
 			);
-			path = Controller;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		3CADAE6C2B10F7AC00D39C6A /* Services */ = {
@@ -113,7 +133,86 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		3CADAE6F2B10F81A00D39C6A /* Model */ = {
+		3CADAE7C2B120E6B00D39C6A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE7F2B12687A00D39C6A /* UIImageView + Extension.swift */,
+				3CADAE812B1269D800D39C6A /* UIView + Extension.swift */,
+				3CADAE832B126BE900D39C6A /* UIButton + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3CADAE852B127C2400D39C6A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE8D2B127CCC00D39C6A /* Model */,
+				3CADAE882B127C8600D39C6A /* View */,
+				3CADAE872B127C7C00D39C6A /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		3CADAE862B127C6B00D39C6A /* List */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE9A2B12AC4400D39C6A /* Model */,
+				3CADAE8A2B127C9900D39C6A /* View */,
+				3CADAE892B127C9200D39C6A /* Controller */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		3CADAE872B127C7C00D39C6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE592B10F70500D39C6A /* MainViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3CADAE882B127C8600D39C6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE7D2B120E9400D39C6A /* QuestionView.swift */,
+				3CADAE772B110DEE00D39C6A /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3CADAE892B127C9200D39C6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE722B10FF0000D39C6A /* ListViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3CADAE8A2B127C9900D39C6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE982B12A0B700D39C6A /* MemCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3CADAE8B2B127CA800D39C6A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE8C2B127CAF00D39C6A /* Controller */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		3CADAE8C2B127CAF00D39C6A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE742B1101A700D39C6A /* TabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3CADAE8D2B127CCC00D39C6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				3CADAE702B10F82400D39C6A /* Mem.swift */,
@@ -121,12 +220,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		3CADAE762B1104E600D39C6A /* View */ = {
+		3CADAE8E2B12862700D39C6A /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				3CADAE772B110DEE00D39C6A /* MainView.swift */,
+				3CADAE912B12869900D39C6A /* Model */,
+				3CADAE8F2B12864600D39C6A /* TableViewBuilder.swift */,
 			);
-			path = View;
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		3CADAE912B12869900D39C6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE922B1286B000D39C6A /* CellModel.swift */,
+				3CADAE942B1286E900D39C6A /* SectionModel.swift */,
+				3CADAE962B12870500D39C6A /* HeaderModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3CADAE9A2B12AC4400D39C6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CADAE9B2B12AC5F00D39C6A /* Prediction.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,12 +325,22 @@
 			files = (
 				3CADAE712B10F82400D39C6A /* Mem.swift in Sources */,
 				3CADAE782B110DEE00D39C6A /* MainView.swift in Sources */,
+				3CADAE9C2B12AC5F00D39C6A /* Prediction.swift in Sources */,
+				3CADAE902B12864600D39C6A /* TableViewBuilder.swift in Sources */,
 				3CADAE6E2B10F7B600D39C6A /* NetworkManager.swift in Sources */,
 				3CADAE732B10FF0000D39C6A /* ListViewController.swift in Sources */,
+				3CADAE822B1269D800D39C6A /* UIView + Extension.swift in Sources */,
+				3CADAE972B12870500D39C6A /* HeaderModel.swift in Sources */,
+				3CADAE802B12687A00D39C6A /* UIImageView + Extension.swift in Sources */,
 				3CADAE5A2B10F70500D39C6A /* MainViewController.swift in Sources */,
+				3CADAE952B1286E900D39C6A /* SectionModel.swift in Sources */,
+				3CADAE992B12A0B700D39C6A /* MemCell.swift in Sources */,
+				3CADAE7E2B120E9400D39C6A /* QuestionView.swift in Sources */,
 				3CADAE752B1101A700D39C6A /* TabBarController.swift in Sources */,
 				3CADAE562B10F70500D39C6A /* AppDelegate.swift in Sources */,
+				3CADAE932B1286B000D39C6A /* CellModel.swift in Sources */,
 				3CADAE582B10F70500D39C6A /* SceneDelegate.swift in Sources */,
+				3CADAE842B126BE900D39C6A /* UIButton + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

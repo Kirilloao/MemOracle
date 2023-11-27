@@ -12,6 +12,9 @@ final class MainView: UIView {
     // MARK: - Closures
     var buttonAction: (() -> Void)?
     var alertAction: (() -> Void)?
+    var newMemAction: (() -> Void)?
+    var predictionAction: ((Prediction) -> Void)?
+    
     
     // MARK: - Private UI Properties
     private lazy var mainLabel: UILabel = {
@@ -35,6 +38,9 @@ final class MainView: UIView {
             action: #selector(predictionButtonDidTapped),
             for: .touchUpInside
         )
+        predButton.backgroundColor = .black
+        predButton.tintColor = .white
+        predButton.layer.cornerRadius = 10
         return predButton
     }()
     
@@ -82,11 +88,13 @@ final class MainView: UIView {
     
     private lazy var acceptView: UIView = {
         var accept = UIView.makeViewForButton(with: .systemGreen)
+        accept.isHidden = true
         return accept
     }()
     
     private lazy var newMemView: UIView = {
         var newMem = UIView.makeViewForButton(with: .systemRed)
+        newMem.isHidden = true
         return newMem
     }()
     
@@ -96,6 +104,8 @@ final class MainView: UIView {
             with: resizedImage ?? UIImage(),
             and: .systemGreen
         )
+        accept.addTarget(self, action: #selector(acceptButtonDidTapped), for: .touchUpInside)
+//        accept.isHidden = true
         return accept
     }()
     
@@ -105,22 +115,25 @@ final class MainView: UIView {
             with: resizedImage ?? UIImage(),
             and: .systemRed
         )
+        newMem.addTarget(self, action: #selector(newMemButtonDidTapped), for: .touchUpInside)
+//        newMem.isHidden = true
         return newMem
     }()
     
     // MARK: - Private Properties
-    private var currentImages = [String: UIImageView]()
+    private var currentImageView = UIImageView()
+    private var newDataImage = Data()
     
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setViews()
         setupConstraints()
-        currentImages = [
-            "FirstImage": firstPredictionImageView,
-            "SecondImage" :secondPredictionImageView,
-            "ThirdImage" : thirdPredictionImageView
-        ]
+//        currentImages = [
+//            "FirstImage": firstPredictionImageView,
+//            "SecondImage" :secondPredictionImageView,
+//            "ThirdImage" : thirdPredictionImageView
+//        ]
     }
     
     required init?(coder: NSCoder) {
@@ -157,9 +170,35 @@ final class MainView: UIView {
         }
     }
     
+    func getNewMem(_ data: Data) {
+        newDataImage = data
+        currentImageView.image = UIImage(data: data)
+    }
+    
+    func resetDataInScreen() {
+        questionTextField.text = ""
+        currentImageView.image = UIImage(data: Data())
+        firstPredictionImageView.isHidden = false
+        secondPredictionImageView.isHidden = false
+        thirdPredictionImageView.isHidden = false
+        
+        onePlugView.isHidden = false
+        twoPlugView.isHidden = false
+        threePlugView.isHidden = false
+        imagesStackView.isHidden = true
+    }
+    
     // MARK: - Private Actions
     @objc private func predictionButtonDidTapped() {
         questionTextField.text != "" ? buttonAction?() : showAlert()
+        
+        if questionTextField.text != "" {
+            acceptView.isHidden = false
+            newMemView.isHidden = false
+        }
+
+
+        
     }
     
     @objc private func showFirstMem() {
@@ -167,10 +206,7 @@ final class MainView: UIView {
         thirdPredictionImageView.isHidden = true
         secondPredictionImageView.isHidden = true
         
-        currentImages.removeValue(forKey: "SecondImage")
-        currentImages.removeValue(forKey: "ThirdImage")
-        
-        print(currentImages)
+        currentImageView = firstPredictionImageView
     }
     
     @objc private func showSecondMem() {
@@ -178,10 +214,7 @@ final class MainView: UIView {
         firstPredictionImageView.isHidden = true
         thirdPredictionImageView.isHidden = true
         
-        currentImages.removeValue(forKey: "FirstImage")
-        currentImages.removeValue(forKey: "ThirdImage")
-        
-        print(currentImages)
+        currentImageView = secondPredictionImageView
     }
     
     @objc private func showThirdMem() {
@@ -189,10 +222,22 @@ final class MainView: UIView {
         firstPredictionImageView.isHidden = true
         secondPredictionImageView.isHidden = true
         
-        currentImages.removeValue(forKey: "FirstImage")
-        currentImages.removeValue(forKey: "SecondImage")
-        
-        print(currentImages)
+        currentImageView = thirdPredictionImageView
+    }
+    
+    @objc private func acceptButtonDidTapped() {
+        if let question = questionTextField.text, let image = currentImageView.image?.pngData() {
+            let prediction = Prediction(question: question, imageData: image)
+            predictionAction?(prediction)
+        }
+    }
+    
+    @objc private func newMemButtonDidTapped() {
+        currentImageView.image = UIImage(data: newDataImage)
+        UIView.transition(with: currentImageView, duration: 1.0, options: .transitionFlipFromLeft, animations: {
+            self.newMemAction?()
+        })
+
     }
     
     // MARK: - Private Methods
@@ -224,7 +269,7 @@ extension MainView {
     
     private func setupConstraints() {
         mainLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(70)
             make.centerX.equalToSuperview()
         }
         
@@ -238,13 +283,14 @@ extension MainView {
         predictionButton.snp.makeConstraints { make in
             make.top.equalTo(questionTextField.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
+            make.width.equalTo(130)
         }
         
         imagesStackView.snp.makeConstraints { make in
             make.top.equalTo(predictionButton.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)
-            make.height.equalTo(180)
+            make.height.equalTo(240)
         }
         
         onePlugView.snp.makeConstraints { $0.edges.equalToSuperview() }

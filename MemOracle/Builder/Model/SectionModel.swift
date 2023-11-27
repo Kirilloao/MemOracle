@@ -5,4 +5,9 @@
 //  Created by Kirill Taraturin on 25.11.2023.
 //
 
-import Foundation
+import UIKit
+
+struct SectionModel {
+    let cells: [CellModel]
+    var header: HeaderModel?
+}

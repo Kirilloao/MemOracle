@@ -17,13 +17,15 @@ final class TabBarController: UITabBarController {
     
     private func setupControllers() {
         let firstVC = MainViewController()
+        let firstNavVC = UINavigationController(rootViewController: firstVC)
         firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         
         let secondVC = ListViewController()
+        let secondNavVC = UINavigationController(rootViewController: secondVC)
         secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         
         tabBar.tintColor = .systemBlue
-        self.viewControllers = [firstVC, secondVC]
+        self.viewControllers = [firstNavVC, secondNavVC]
     }
 
 }
