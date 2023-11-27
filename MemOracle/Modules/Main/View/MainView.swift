@@ -158,13 +158,7 @@ final class MainView: UIView {
     func changeVisibleToMemes() {
         imagesStackView.isHidden = false
         
-        if imagesStackView.alpha == 0 {
-            imagesStackView.alpha = 1
-            
-        } else {
-            imagesStackView.alpha = 0
-            
-        }
+        imagesStackView.alpha = imagesStackView.alpha == 0 ? 1 : 0
         
         UIView.animate(withDuration: 1.0) {
             self.imagesStackView.alpha = 1
@@ -179,42 +173,47 @@ final class MainView: UIView {
     func resetDataInScreen() {
         questionTextField.text = ""
         currentImageView.image = UIImage(data: Data())
-        firstPredictionImageView.isHidden = false
-        secondPredictionImageView.isHidden = false
-        thirdPredictionImageView.isHidden = false
-        
-        onePlugView.isHidden = false
-        twoPlugView.isHidden = false
-        threePlugView.isHidden = false
-        imagesStackView.isHidden = true
+        hideViews(
+            imagesStackView,
+            acceptView,
+            newMemView
+        )
     }
     
     // MARK: - Private Actions
     @objc private func predictionButtonDidTapped() {
-        questionTextField.text != "" ? buttonAction?() : showAlert()
-        
         if questionTextField.text != "" {
-            acceptView.isHidden = false
-            newMemView.isHidden = false
+            buttonAction?()
+            showViews(acceptView,
+                      newMemView,
+                      imagesStackView,
+                      firstPredictionImageView,
+                      secondPredictionImageView,
+                      thirdPredictionImageView,
+                      onePlugView,
+                      twoPlugView,
+                      threePlugView
+            )
+        } else {
+            showAlert()
         }
     }
     
     @objc private func showFirstMem() {
         hideViews(onePlugView, thirdPredictionImageView, secondPredictionImageView)
-        firstPredictionImageView.alpha = 0
         animateView(firstPredictionImageView)
         currentImageView = firstPredictionImageView
     }
     
     @objc private func showSecondMem() {
         hideViews(twoPlugView, firstPredictionImageView, thirdPredictionImageView)
-        
+        animateView(secondPredictionImageView)
         currentImageView = secondPredictionImageView
     }
     
     @objc private func showThirdMem() {
         hideViews(threePlugView, firstPredictionImageView, secondPredictionImageView)
-        
+        animateView(thirdPredictionImageView)
         currentImageView = thirdPredictionImageView
     }
     
@@ -236,6 +235,36 @@ final class MainView: UIView {
     // MARK: - Private Methods
     private func showAlert() {
         alertAction?()
+    }
+    
+    private func resizeImage(image: String) -> UIImage? {
+        if let image = UIImage(systemName: image) {
+            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40, height: 40))
+            return renderer.image { (context) in
+                image.draw(in: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
+            }
+        } else {
+            return UIImage()
+        }
+    }
+    
+    private func hideViews(_ views: UIView...) {
+        views.forEach { view in
+            view.isHidden = true
+        }
+    }
+    
+    private func showViews(_ views: UIView...) {
+        views.forEach { view in
+            view.isHidden = false
+        }
+    }
+    
+    private func animateView(_ view: UIView) {
+        view.alpha = 0
+        UIView.animate(withDuration: 1.0, animations: {
+            view.alpha = 1
+        })
     }
 }
 
@@ -311,29 +340,5 @@ extension MainView {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
-    }
-    
-    private func resizeImage(image: String) -> UIImage? {
-        if let image = UIImage(systemName: image) {
-            let renderer = UIGraphicsImageRenderer(size: CGSize(width: 40, height: 40))
-            return renderer.image { (context) in
-                image.draw(in: CGRect(origin: .zero, size: CGSize(width: 40, height: 40)))
-            }
-        } else {
-            return UIImage()
-        }
-    }
-    
-    private func hideViews(_ views: UIView...) {
-        views.forEach { view in
-            view.isHidden = true
-        }
-    }
-    
-    private func animateView(_ view: UIView) {
-        UIView.animate(withDuration: 1.0, animations: {
-            // Здесь элемент становится полностью непрозрачным (появляется)
-            view.alpha = 1
-        })
     }
 }
