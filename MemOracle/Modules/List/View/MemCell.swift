@@ -35,7 +35,7 @@ final class MemCell: UITableViewCell {
         mem.clipsToBounds = true
         return mem
     }()
-
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,7 +71,7 @@ final class MemCell: UITableViewCell {
         questionLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(10)
             make.right.equalTo(memImageView.snp.left).offset(-20)
-//            make.centerY.equalToSuperview()
+            //            make.centerY.equalToSuperview()
             make.top.equalToSuperview().offset(8)
             make.bottom.equalToSuperview().offset(-8)
         }

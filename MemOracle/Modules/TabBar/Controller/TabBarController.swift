@@ -15,6 +15,7 @@ final class TabBarController: UITabBarController {
         setupControllers()
     }
     
+    // MARK: - Private Methods
     private func setupControllers() {
         let firstVC = MainViewController()
         let firstNavVC = UINavigationController(rootViewController: firstVC)

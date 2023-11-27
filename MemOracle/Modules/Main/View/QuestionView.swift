@@ -28,8 +28,21 @@ final class QuestionView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setViews()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Private Methods
+    private func setViews() {
         addSubview(questionView)
         questionView.addSubview(questionImageView)
+    }
+    
+    private func setupConstraints() {
         questionView.snp.makeConstraints { $0.edges.equalToSuperview() }
         questionImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(5)
@@ -37,9 +50,5 @@ final class QuestionView: UIView {
             make.right.equalToSuperview().offset(-5)
             make.bottom.equalToSuperview().offset(-5)
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -7,16 +7,19 @@
 
 import Foundation
 
+// MARK: - NetworkError
 enum NetworkError: Error {
     case noData
     case invalidURL
     case decodingError
 }
 
+// MARK: - Link
 enum Link: String {
     case api = "https://api.imgflip.com/get_memes"
 }
 
+// MARK: - NetworkManager
 final class NetworkManager {
     static let shared = NetworkManager()
     

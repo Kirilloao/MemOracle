@@ -15,7 +15,6 @@ final class MainView: UIView {
     var newMemAction: (() -> Void)?
     var predictionAction: ((Prediction) -> Void)?
     
-    
     // MARK: - Private UI Properties
     private lazy var mainLabel: UILabel = {
         var label = UILabel()
@@ -27,6 +26,7 @@ final class MainView: UIView {
         var questionTF = UITextField()
         questionTF.borderStyle = .roundedRect
         questionTF.placeholder = "Enter your question here"
+        questionTF.spellCheckingType = .no
         return questionTF
     }()
     
@@ -104,8 +104,11 @@ final class MainView: UIView {
             with: resizedImage ?? UIImage(),
             and: .systemGreen
         )
-        accept.addTarget(self, action: #selector(acceptButtonDidTapped), for: .touchUpInside)
-//        accept.isHidden = true
+        accept.addTarget(
+            self,
+            action: #selector(acceptButtonDidTapped),
+            for: .touchUpInside)
+        
         return accept
     }()
     
@@ -115,8 +118,11 @@ final class MainView: UIView {
             with: resizedImage ?? UIImage(),
             and: .systemRed
         )
-        newMem.addTarget(self, action: #selector(newMemButtonDidTapped), for: .touchUpInside)
-//        newMem.isHidden = true
+        newMem.addTarget(
+            self,
+            action: #selector(newMemButtonDidTapped),
+            for: .touchUpInside
+        )
         return newMem
     }()
     
@@ -129,11 +135,6 @@ final class MainView: UIView {
         super.init(frame: frame)
         setViews()
         setupConstraints()
-//        currentImages = [
-//            "FirstImage": firstPredictionImageView,
-//            "SecondImage" :secondPredictionImageView,
-//            "ThirdImage" : thirdPredictionImageView
-//        ]
     }
     
     required init?(coder: NSCoder) {
@@ -196,31 +197,23 @@ final class MainView: UIView {
             acceptView.isHidden = false
             newMemView.isHidden = false
         }
-
-
-        
     }
     
     @objc private func showFirstMem() {
-        onePlugView.isHidden = true
-        thirdPredictionImageView.isHidden = true
-        secondPredictionImageView.isHidden = true
-        
+        hideViews(onePlugView, thirdPredictionImageView, secondPredictionImageView)
+        firstPredictionImageView.alpha = 0
+        animateView(firstPredictionImageView)
         currentImageView = firstPredictionImageView
     }
     
     @objc private func showSecondMem() {
-        twoPlugView.isHidden = true
-        firstPredictionImageView.isHidden = true
-        thirdPredictionImageView.isHidden = true
+        hideViews(twoPlugView, firstPredictionImageView, thirdPredictionImageView)
         
         currentImageView = secondPredictionImageView
     }
     
     @objc private func showThirdMem() {
-        threePlugView.isHidden = true
-        firstPredictionImageView.isHidden = true
-        secondPredictionImageView.isHidden = true
+        hideViews(threePlugView, firstPredictionImageView, secondPredictionImageView)
         
         currentImageView = thirdPredictionImageView
     }
@@ -237,15 +230,13 @@ final class MainView: UIView {
         UIView.transition(with: currentImageView, duration: 1.0, options: .transitionFlipFromLeft, animations: {
             self.newMemAction?()
         })
-
+        
     }
     
     // MARK: - Private Methods
     private func showAlert() {
         alertAction?()
     }
-    
-    
 }
 
 // MARK: - Setup Views
@@ -331,5 +322,18 @@ extension MainView {
         } else {
             return UIImage()
         }
+    }
+    
+    private func hideViews(_ views: UIView...) {
+        views.forEach { view in
+            view.isHidden = true
+        }
+    }
+    
+    private func animateView(_ view: UIView) {
+        UIView.animate(withDuration: 1.0, animations: {
+            // Здесь элемент становится полностью непрозрачным (появляется)
+            view.alpha = 1
+        })
     }
 }

@@ -11,6 +11,8 @@ final class ListViewController: UITableViewController {
     
     // MARK: - Private Properties
     private var tableViewBuilder = TableViewBuilder(tableView: UITableView())
+    
+    // MARK: - Public Properties
     var mems: [Prediction] = []
     
     // MARK: - Init
@@ -29,7 +31,6 @@ final class ListViewController: UITableViewController {
         setViews()
         registerCell()
         setupTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +46,7 @@ final class ListViewController: UITableViewController {
     
     // MARK: - Private Methods
     private func setupTableView() {
-                tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         
         let memCell = mems.map { mem -> CellModel in
             var cellModel = CellModel(identifier: "memCell")
@@ -57,11 +58,9 @@ final class ListViewController: UITableViewController {
             }
             
             return cellModel
-            
         }
         
         let memSection = SectionModel(cells: memCell)
-        
         tableViewBuilder.sections = [memSection]
     }
     

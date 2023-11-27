@@ -118,7 +118,25 @@ final class MainViewController: UIViewController {
         
         present(alertController, animated: true)
     }
-    
+}
+
+// MARK: - Networking
+extension MainViewController {
+    private func fetchMemes(with url: String) {
+        networkManager.fetch(with: url) { result in
+            switch result {
+            case .success(let mem):
+                self.memes = mem.data.memes
+                self.showMemes()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+// MARK: - Set Views
+extension MainViewController {
     private func setViews() {
         view.backgroundColor = .white
         view.addSubview(mainView)
@@ -143,31 +161,5 @@ final class MainViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = refreshButton
     }
-}
-
-// MARK: - Networking
-extension MainViewController {
-    private func fetchMemes(with url: String) {
-        networkManager.fetch(with: url) { result in
-            switch result {
-            case .success(let mem):
-                self.memes = mem.data.memes
-                self.showMemes()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    //    private func fetchImage(with url: String) -> Data {
-    //        networkManager.fetchImage(from: url) { result in
-    //            switch result {
-    //            case .success(let imageData):
-    //                return imageData
-    //            case .failure(let error):
-    //                print(error)
-    //            }
-    //        }
-    //    }
 }
 
